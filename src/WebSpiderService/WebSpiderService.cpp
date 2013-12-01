@@ -41,6 +41,12 @@ void __cdecl _tmain(int argc, TCHAR *argv[])  {
 		return;
 	}
 
+	if (lstrcmpi(argv[1], TEXT("uninstall")) == 0)
+	{
+		SvcUninstall();
+		return;
+	}
+
 	// TO_DO: Add any additional services for the process to this table.
 	SERVICE_TABLE_ENTRY DispatchTable[] =
 	{
@@ -152,7 +158,6 @@ VOID SvcUninstall()
 		if (DeleteService(schService))
 		{
 			printf("Service successfully uninstalled!\n");
-			SvcInstall();
 		}
 		else
 		{
