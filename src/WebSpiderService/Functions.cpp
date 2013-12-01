@@ -24,9 +24,9 @@ void PerformRequests()
 		cout << fileNames->at(i) << endl;
 		string url = fileNames->at(i);
 		std::ofstream logFileStream;
-		logFileStream.open("C:\\WebContent\\" + url + ".txt", std::ios::app);
+		logFileStream.open("C:\\WebContent\\" + url + ".txt", std::ios::trunc);
 		WebRequestMaker *requestMaker = new WebRequestMaker();
-		requestMaker->makeRequest("url", logFileStream);
+		requestMaker->makeRequest(url, logFileStream);
 		logFileStream.close();
 	}
 }
