@@ -4,7 +4,7 @@ WebRequestMaker::WebRequestMaker()
 {
 }
 
-WebRequestMaker::WebRequestMaker(char* url)
+WebRequestMaker::WebRequestMaker(std::string url)
 {
 	this->url = url;
 }
@@ -13,17 +13,22 @@ WebRequestMaker::~WebRequestMaker()
 {
 }
 
-char* WebRequestMaker::getUrl()
+std::string WebRequestMaker::getUrl()
 {
 	return this->url;
 }
 
-void WebRequestMaker::setUrl(char* url)
+void WebRequestMaker::setUrl(std::string url)
 {
 	this->url = url;
 }
 
-char* WebRequestMaker::makeRequest()
+std::string WebRequestMaker::makeRequest()
+{
+	return nullptr;
+}
+
+std::string WebRequestMaker::makeRequest(std::string url)
 {
 	return nullptr;
 }

@@ -1,16 +1,19 @@
+#include <string>
+
 #pragma once
 class WebRequestMaker
 {
 public:
 	WebRequestMaker();
-	WebRequestMaker(char* url);
+	WebRequestMaker(std::string url);
 	~WebRequestMaker();
 
-	char* getUrl();
-	void setUrl(char* url);
-	char* makeRequest();
+	std::string getUrl();
+	void setUrl(std::string url);
+	std::string makeRequest();
+	std::string makeRequest(std::string url);
 
 private:
-	char* url;
+	std::string url;
 };
 
