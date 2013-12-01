@@ -6,14 +6,19 @@
 #include <strsafe.h>
 #include <chrono>
 #include <thread>
+#include <iostream>
+#include <istream>
+#include <ostream>
 #include <fstream>
 #include "stdafx.h"
+
+using namespace std;
 
 #pragma comment(lib, "advapi32.lib")
 
 #define SVCNAME TEXT("WebSpiderService")
 #define MAX_SERVICE_CREATE_ATTEMPTS 100
-#define SERVICE_THREAD_SLEEP_DURATION 2000
+#define SERVICE_THREAD_SLEEP_DURATION 60000
 
 SERVICE_STATUS          gSvcStatus;
 SERVICE_STATUS_HANDLE   gSvcStatusHandle;
@@ -269,13 +274,16 @@ void doWork()
 {
 	while (1)
 	{
-		std::ofstream logFileStream;
+		/*std::ofstream logFileStream;
 		logFileStream.open("C:\\WebContent\\mail.ru.txt", std::ios::app);
 		WebRequestMaker *requestMaker = new WebRequestMaker();
 		requestMaker->makeRequest("mail.ru", logFileStream);
 		logFileStream << "Done!\n";
 		logFileStream.close();
-		return;
+		return;*/
+
+		PerformRequests();
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(SERVICE_THREAD_SLEEP_DURATION));
 	}
 }

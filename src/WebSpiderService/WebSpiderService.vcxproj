@@ -80,11 +80,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WebRequestMaker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="WebRequestMaker.cpp" />
     <ClCompile Include="WebSpiderService.cpp" />

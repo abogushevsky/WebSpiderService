@@ -7,6 +7,7 @@
 
 #include "targetver.h"
 #include "WebRequestMaker.h"
+#include "Functions.h"
 
 #include <stdio.h>
 #include <tchar.h>
