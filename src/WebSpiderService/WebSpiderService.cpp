@@ -28,6 +28,8 @@ VOID ReportSvcStatus(DWORD, DWORD, DWORD);
 VOID SvcInit(DWORD, LPTSTR *);
 VOID SvcReportEvent(LPTSTR);
 
+void doWork();
+
 void ServiceMain(int argc, char** argv) {
 	return;
 }
@@ -254,15 +256,23 @@ VOID SvcInit(DWORD dwArgc, LPTSTR *lpszArgv)
 
 	while (1)
 	{
-		std::ofstream logFileStream;
-		logFileStream.open("C:\\test.txt", std::ios::app);
-		logFileStream << "Service is working";
-		logFileStream.close();
+		std::thread serviceProcessThread{ doWork };
 		// Check whether to stop the service.
 
 		WaitForSingleObject(ghSvcStopEvent, INFINITE);
 		ReportSvcStatus(SERVICE_STOPPED, NO_ERROR, 0);
 		return;
+	}
+}
+
+void doWork()
+{
+	while (1)
+	{
+		std::ofstream logFileStream;
+		logFileStream.open("C:\\test.txt", std::ios::app);
+		logFileStream << "Service is working\n";
+		logFileStream.close();
 	}
 }
 
