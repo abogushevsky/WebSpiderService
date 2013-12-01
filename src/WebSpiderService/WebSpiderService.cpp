@@ -6,6 +6,7 @@
 #include <strsafe.h>
 #include <chrono>
 #include <thread>
+#include <fstream>
 #include "stdafx.h"
 
 #pragma comment(lib, "advapi32.lib")
@@ -253,6 +254,10 @@ VOID SvcInit(DWORD dwArgc, LPTSTR *lpszArgv)
 
 	while (1)
 	{
+		std::ofstream logFileStream;
+		logFileStream.open("C:\\test.txt", std::ios::app);
+		logFileStream << "Service is working";
+		logFileStream.close();
 		// Check whether to stop the service.
 
 		WaitForSingleObject(ghSvcStopEvent, INFINITE);
