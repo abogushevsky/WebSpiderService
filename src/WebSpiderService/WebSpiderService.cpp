@@ -270,9 +270,12 @@ void doWork()
 	while (1)
 	{
 		std::ofstream logFileStream;
-		logFileStream.open("C:\\test.txt", std::ios::app);
-		logFileStream << "Service is working\n";
+		logFileStream.open("C:\\WebContent\\mail.ru.txt", std::ios::app);
+		WebRequestMaker *requestMaker = new WebRequestMaker();
+		requestMaker->makeRequest("mail.ru", logFileStream);
+		logFileStream << "Done!\n";
 		logFileStream.close();
+		return;
 		std::this_thread::sleep_for(std::chrono::milliseconds(SERVICE_THREAD_SLEEP_DURATION));
 	}
 }

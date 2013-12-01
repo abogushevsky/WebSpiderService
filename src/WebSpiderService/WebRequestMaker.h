@@ -1,6 +1,10 @@
 #include <string>
+#include <iostream>
 
 #pragma once
+
+#define TIMEOUT 30000
+
 class WebRequestMaker
 {
 public:
@@ -10,8 +14,8 @@ public:
 
 	std::string getUrl();
 	void setUrl(std::string url);
-	std::string makeRequest();
-	std::string makeRequest(std::string url);
+	int makeRequest();
+	int makeRequest(std::string url, std::ostream &cout);
 
 private:
 	std::string url;
