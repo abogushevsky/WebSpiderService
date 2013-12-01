@@ -1,6 +1,5 @@
 #include "WebRequestMaker.h"
 
-
 WebRequestMaker::WebRequestMaker()
 {
 }

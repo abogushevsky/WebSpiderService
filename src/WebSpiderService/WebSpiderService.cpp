@@ -13,7 +13,7 @@
 
 #define SVCNAME TEXT("WebSpiderService")
 #define MAX_SERVICE_CREATE_ATTEMPTS 100
-#define SERVICE_DELETING_WAIT_DURATION 3000
+#define SERVICE_THREAD_SLEEP_DURATION 2000
 
 SERVICE_STATUS          gSvcStatus;
 SERVICE_STATUS_HANDLE   gSvcStatusHandle;
@@ -273,6 +273,7 @@ void doWork()
 		logFileStream.open("C:\\test.txt", std::ios::app);
 		logFileStream << "Service is working\n";
 		logFileStream.close();
+		std::this_thread::sleep_for(std::chrono::milliseconds(SERVICE_THREAD_SLEEP_DURATION));
 	}
 }
 
