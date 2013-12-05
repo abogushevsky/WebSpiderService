@@ -37,15 +37,23 @@ void PerformRequests()
 		regex aPattern{ "(<a href=\"/)+.+(</a>)+" };
 
 		string line;
-		while (requesResultStream >> line) {
+		ofstream linksFileStream;
+		string linksFilePath = "C:\\WebContent\\" + url + "_links.txt";
+		linksFileStream.open(linksFilePath, std::ios::app);
+
+		while (getline(requesResultStream, line)) {
 			smatch matches;
 			if (regex_search(line, matches, aPattern)) {
-				cout << matches[0] << endl;
+				//cout << matches[0] << endl;
+				linksFileStream << matches[0] << endl;
 
 				if (matches.size() > 1 && matches[1].matched) {
-					cout << "\t" << matches[1] << endl;
+					//cout << "\t" << matches[1] << endl;
 				}
 			}
 		}
+
+		linksFileStream.close();
+		requesResultStream.close();
 	}
 }
