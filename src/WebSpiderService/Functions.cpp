@@ -3,11 +3,14 @@
 #include <ostream>
 #include <fstream>
 #include <vector>
+#include <regex>
 
 #include "Functions.h"
 #include "stdafx.h"
 
 using namespace std;
+
+//<a> regex: (<a href="/)+.+(</a>)+
 
 void PerformRequests()
 {
@@ -24,9 +27,25 @@ void PerformRequests()
 		cout << fileNames->at(i) << endl;
 		string url = fileNames->at(i);
 		std::ofstream logFileStream;
-		logFileStream.open("C:\\WebContent\\" + url + ".txt", std::ios::trunc);
+		string filePath = "C:\\WebContent\\" + url + ".txt";
+		logFileStream.open(filePath, std::ios::app);
 		WebRequestMaker *requestMaker = new WebRequestMaker();
 		requestMaker->makeRequest(url, logFileStream);
 		logFileStream.close();
+
+		ifstream requesResultStream(filePath);
+		regex aPattern{ "(<a href=\"/)+.+(</a>)+" };
+
+		string line;
+		while (requesResultStream >> line) {
+			smatch matches;
+			if (regex_search(line, matches, aPattern)) {
+				cout << matches[0] << endl;
+
+				if (matches.size() > 1 && matches[1].matched) {
+					cout << "\t" << matches[1] << endl;
+				}
+			}
+		}
 	}
 }

@@ -41,6 +41,7 @@ void ServiceMain(int argc, char** argv) {
 
 int main(int argc, char* argv[]) {
 	cout << "Hello world\n";
+	PerformRequests();
 }
 
 /* void __cdecl _tmain(int argc, TCHAR *argv[])  {
