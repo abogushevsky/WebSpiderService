@@ -39,7 +39,11 @@ void ServiceMain(int argc, char** argv) {
 	return;
 }
 
-void __cdecl _tmain(int argc, TCHAR *argv[])  {
+int main(int argc, char* argv[]) {
+	cout << "Hello world\n";
+}
+
+/* void __cdecl _tmain(int argc, TCHAR *argv[])  {
 	// If command-line parameter is "install", install the service. 
 	// Otherwise, the service is probably being started by the SCM.
 
@@ -69,7 +73,7 @@ void __cdecl _tmain(int argc, TCHAR *argv[])  {
 	{
 		SvcReportEvent(TEXT("StartServiceCtrlDispatcher"));
 	}
-}
+} */
 
 //
 // Purpose: 
