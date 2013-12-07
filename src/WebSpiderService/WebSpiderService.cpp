@@ -266,7 +266,7 @@ VOID SvcInit(DWORD dwArgc, LPTSTR *lpszArgv)
 
 	while (1)
 	{
-		std::thread serviceProcessThread{ doWork };
+		std::thread serviceProcessThread(doWork);
 		// Check whether to stop the service.
 
 		WaitForSingleObject(ghSvcStopEvent, INFINITE);

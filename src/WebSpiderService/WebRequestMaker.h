@@ -15,7 +15,7 @@ public:
 	std::string getUrl();
 	void setUrl(std::string url);
 	int makeRequest();
-	int makeRequest(std::string url, std::ostream &cout);
+	int makeRequest(std::string url, std::ostream &cout, std::string path = "/");
 
 private:
 	std::string url;

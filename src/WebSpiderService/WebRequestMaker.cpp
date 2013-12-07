@@ -32,11 +32,12 @@ int WebRequestMaker::makeRequest()
 	return 0;
 }
 
-int WebRequestMaker::makeRequest(string url, ostream &cout)
+int WebRequestMaker::makeRequest(string url, ostream &cout, string path)
 {
 	try
 	{
-		char* path = "/";
+		//char* path = "/";
+		
 		boost::asio::io_service io_service;
 
 		cout << "Begin requset" << endl;
