@@ -62,9 +62,9 @@ void PerformRequests()
 					requestMaker->makeRequest(url, logFileStream, hrefStr);
 					delete requestMaker;
 					logFileStream.close();
+					j++;
 				}
 			}
-			j++;
 		}
 		
 		linksFileStream.close();
