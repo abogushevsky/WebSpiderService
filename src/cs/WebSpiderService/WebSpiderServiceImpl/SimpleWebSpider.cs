@@ -34,7 +34,10 @@ namespace WebSpiderServiceImpl
             Parallel.ForEach(urlsToDownload, (url) =>
             {
                 string document = this._contentDownloader.DownloadUrl(url);
-                SaveDocument(url, document);
+                if (!string.IsNullOrEmpty(document))
+                {
+                    SaveDocument(url, document);
+                }
             });
         }
 
@@ -46,11 +49,14 @@ namespace WebSpiderServiceImpl
             {
                 using (StreamReader reader = new StreamReader(fs))
                 {
-                    string line = reader.ReadLine();
-                    //TODO: Add url validation
-                    if (!string.IsNullOrEmpty(line))
+                    while (!reader.EndOfStream)
                     {
-                        result.Add(line);
+                        string line = reader.ReadLine();
+                        //TODO: Add url validation
+                        if (!string.IsNullOrEmpty(line))
+                        {
+                            result.Add(line);
+                        }
                     }
                 }
             }
@@ -60,8 +66,8 @@ namespace WebSpiderServiceImpl
 
         private void SaveDocument(string url, string document)
         {
-            string documentFilePath = string.Format("{0}\\{1}", Properties.Settings.Default.DocumentsFolderPath,
-                this._currentDocumentIndex);
+            string documentFilePath = string.Format("{0}\\{1}.txt", Properties.Settings.Default.DocumentsFolderPath,
+                url.Replace("/", "").Replace("http:", ""));
             using (FileStream fs = new FileStream(documentFilePath, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
