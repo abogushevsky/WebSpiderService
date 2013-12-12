@@ -46,6 +46,7 @@
     </Compile>
     <Compile Include="SimpleWebSpider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebContentDownloader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebSpiderService.Common\WebSpiderService.Common.csproj">
