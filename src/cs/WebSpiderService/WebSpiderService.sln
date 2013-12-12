@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Console", "WebSpiderService.Console\WebSpiderService.Console.csproj", "{E6BF1BDD-4FC7-4F0A-A103-C3337A0386ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Common", "WebSpiderService.Common\WebSpiderService.Common.csproj", "{479CFEF8-044C-42F5-8A88-CF5A543A84C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E6BF1BDD-4FC7-4F0A-A103-C3337A0386ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6BF1BDD-4FC7-4F0A-A103-C3337A0386ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6BF1BDD-4FC7-4F0A-A103-C3337A0386ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
