@@ -16,12 +16,15 @@ namespace WebSpiderService.Impl
     {
         private long _currentDocumentIndex;
         private readonly IContentDownloader _contentDownloader;
+        private readonly IDocumentAnalizer _documentAnalizer;
 
-        public SimpleWebSpider(IContentDownloader contentDownloader)
+        public SimpleWebSpider(IContentDownloader contentDownloader, IDocumentAnalizer documentAnalizer)
         {
             Contract.Requires(contentDownloader != null);
+            Contract.Requires(documentAnalizer != null);
 
             this._contentDownloader = contentDownloader;
+            this._documentAnalizer = documentAnalizer;
             this._currentDocumentIndex = 0;
         }
 
@@ -30,7 +33,26 @@ namespace WebSpiderService.Impl
         /// </summary>
         public void DowloadDocuments()
         {
-            string[] urlsToDownload = GetUrls();
+            DownloadDocuments(GetUrls());
+
+            string[] documentsFileNames = Directory.GetFiles(Properties.Settings.Default.DocumentsFolderPath);
+            //Parallel.ForEach(documentsFileNames, (docFileName) =>
+            //{
+            //    string documentContent = GetDocumentContentFromFile(docFileName);
+            //    string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(documentContent);
+            //    DownloadDocuments(documentUrls);
+            //});
+
+            foreach (string docFileName in documentsFileNames)
+            {
+                string documentContent = GetDocumentContentFromFile(docFileName);
+                string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(documentContent);
+                DownloadDocuments(documentUrls);   
+            }
+        }
+
+        private void DownloadDocuments(string[] urlsToDownload)
+        {
             Parallel.ForEach(urlsToDownload, (url) =>
             {
                 string document = this._contentDownloader.DownloadUrl(url);
@@ -39,6 +61,17 @@ namespace WebSpiderService.Impl
                     SaveDocument(url, document);
                 }
             });
+        }
+
+        private string GetDocumentContentFromFile(string docFileName)
+        {
+            using (FileStream fs = new FileStream(docFileName, FileMode.Open))
+            {
+                using (StreamReader reader = new StreamReader(fs))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         private string[] GetUrls()

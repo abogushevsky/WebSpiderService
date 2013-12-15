@@ -8,7 +8,7 @@ namespace WebSpiderService.Common.Interfaces
     public interface IDocumentAnalizer
     {
         /// <summary>
-        /// Method finds and returns urls in document content and
+        /// Method finds and returns urls in document content
         /// </summary>
         string[] GetLinksFromDocument(string documentContent);
     }

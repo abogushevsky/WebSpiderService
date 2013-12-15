@@ -12,7 +12,12 @@ namespace WebSpiderService.Console
     {
         static void Main(string[] args)
         {
-            ISpiderService spiderService = new SimpleWebSpider(new WebContentDownloader());
+            ISpiderService spiderService = new SimpleWebSpider(new WebContentDownloader(), new RegexDocumentAnalizer());
+
+            System.Console.WriteLine("Press any key to start downloading");
+            System.Console.ReadKey();
+            System.Console.WriteLine("Downloading...");
+
             spiderService.DowloadDocuments();
 
             System.Console.WriteLine("Done!");
