@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Common", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderServiceImpl", "WebSpiderServiceImpl\WebSpiderServiceImpl.csproj", "{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Wcf.Contract", "WebSpiderService.Wcf.Contract\WebSpiderService.Wcf.Contract.csproj", "{051707A5-DC54-4516-84D8-960127CBEEEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Wcf.Impl", "WebSpiderService.Wcf.Impl\WebSpiderService.Wcf.Impl.csproj", "{25BE5196-7163-435D-84EE-25FA3A164A96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051707A5-DC54-4516-84D8-960127CBEEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051707A5-DC54-4516-84D8-960127CBEEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051707A5-DC54-4516-84D8-960127CBEEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051707A5-DC54-4516-84D8-960127CBEEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BE5196-7163-435D-84EE-25FA3A164A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BE5196-7163-435D-84EE-25FA3A164A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BE5196-7163-435D-84EE-25FA3A164A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BE5196-7163-435D-84EE-25FA3A164A96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
