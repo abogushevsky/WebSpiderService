@@ -7,8 +7,8 @@
     <ProjectGuid>{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebSpiderServiceImpl</RootNamespace>
-    <AssemblyName>WebSpiderServiceImpl</AssemblyName>
+    <RootNamespace>WebSpiderService.Impl</RootNamespace>
+    <AssemblyName>WebSpiderService.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Console", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Common", "WebSpiderService.Common\WebSpiderService.Common.csproj", "{479CFEF8-044C-42F5-8A88-CF5A543A84C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderServiceImpl", "WebSpiderServiceImpl\WebSpiderServiceImpl.csproj", "{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Wcf.Contract", "WebSpiderService.Wcf.Contract\WebSpiderService.Wcf.Contract.csproj", "{051707A5-DC54-4516-84D8-960127CBEEEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Wcf.Impl", "WebSpiderService.Wcf.Impl\WebSpiderService.Wcf.Impl.csproj", "{25BE5196-7163-435D-84EE-25FA3A164A96}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.WinService", "WebSpiderService.WinService\WebSpiderService.WinService.csproj", "{89C832B5-FEE1-410A-BCEC-246FAFB07395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Impl", "WebSpiderService.Impl\WebSpiderService.Impl.csproj", "{E15EEB27-A7C7-4405-AE17-B791D29C8909}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C55E18D-A2AC-4ABD-9C47-0057BB37432E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{051707A5-DC54-4516-84D8-960127CBEEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{051707A5-DC54-4516-84D8-960127CBEEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{051707A5-DC54-4516-84D8-960127CBEEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{89C832B5-FEE1-410A-BCEC-246FAFB07395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89C832B5-FEE1-410A-BCEC-246FAFB07395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89C832B5-FEE1-410A-BCEC-246FAFB07395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

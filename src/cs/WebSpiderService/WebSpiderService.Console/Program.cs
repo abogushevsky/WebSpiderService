@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebSpiderService.Common.Interfaces;
-using WebSpiderServiceImpl;
+using WebSpiderService.Impl;
 
 namespace WebSpiderService.Console
 {

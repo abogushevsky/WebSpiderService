@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using WebSpiderService.Common.Interfaces;
 
-namespace WebSpiderServiceImpl
+namespace WebSpiderService.Impl
 {
     public class WebContentDownloader : IContentDownloader
     {

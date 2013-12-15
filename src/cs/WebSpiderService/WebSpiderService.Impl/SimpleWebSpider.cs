@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebSpiderService.Common.Interfaces;
 
-namespace WebSpiderServiceImpl
+namespace WebSpiderService.Impl
 {
     /// <summary>
     /// Simple implementation of ISpiderService using file with urls list
@@ -67,7 +67,7 @@ namespace WebSpiderServiceImpl
         private void SaveDocument(string url, string document)
         {
             string documentFilePath = string.Format("{0}\\{1}.txt", Properties.Settings.Default.DocumentsFolderPath,
-                url.Replace("/", "").Replace("http:", ""));
+                url.Replace("/", "").Replace(":", ""));
 
             using (FileStream fs = new FileStream(documentFilePath, FileMode.Create))
             {
