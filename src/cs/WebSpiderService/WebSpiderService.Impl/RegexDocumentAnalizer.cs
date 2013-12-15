@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
 using WebSpiderService.Common.Interfaces;
@@ -21,14 +22,21 @@ namespace WebSpiderService.Impl
         {
             Contract.Requires(documentContent != null);
 
+            List<string> result = new List<string>();
+
             Match matchResult = this._hrefRegex.Match(documentContent);
 
             if (matchResult.Success)
             {
-                
+                result.Add(matchResult.Value);
+                for (int i = 0; i < matchResult.Length; i++)
+                {
+                    Match match = matchResult.NextMatch();
+                    result.Add(match.Value);
+                }
             }
 
-            throw new NotImplementedException();
+            return result.ToArray();
         }
     }
 }
