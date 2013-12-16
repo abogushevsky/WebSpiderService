@@ -24,16 +24,11 @@ namespace WebSpiderService.Impl
 
             List<string> result = new List<string>();
 
-            Match matchResult = this._hrefRegex.Match(documentContent);
+            MatchCollection matches = this._hrefRegex.Matches(documentContent);
 
-            if (matchResult.Success)
+            foreach (Match match in matches)
             {
-                result.Add(matchResult.Value);
-                for (int i = 0; i < matchResult.Length; i++)
-                {
-                    Match match = matchResult.NextMatch();
-                    result.Add(match.Value);
-                }
+                result.Add(match.Value);
             }
 
             return result.ToArray();
