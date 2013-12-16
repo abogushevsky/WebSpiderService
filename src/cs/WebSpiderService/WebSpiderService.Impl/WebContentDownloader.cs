@@ -28,9 +28,24 @@ namespace WebSpiderService.Impl
         /// <param name="siteUrl"></param>
         /// <param name="resourcePath"></param>
         /// <returns></returns>
-        public Task<string> DownloadSiteResourseAsync(string siteUrl, string resourcePath)
+        public async Task<string> DownloadSiteResourseAsync(string siteUrl, string resourcePath)
         {
-            throw new NotImplementedException();
+            if (!resourcePath.StartsWith("/"))
+            {
+                return await DownloadUrlAsync(resourcePath);
+            }
+
+            try
+            {
+                WebClient webClient = new WebClient();
+                Uri baseUri = new Uri(siteUrl);
+                Uri uri = new Uri(baseUri, resourcePath);
+                return await webClient.DownloadStringTaskAsync(uri);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -60,7 +75,22 @@ namespace WebSpiderService.Impl
         /// <returns></returns>
         public string DownloadSiteResourse(string siteUrl, string resourcePath)
         {
-            throw new NotImplementedException();
+            if (!resourcePath.StartsWith("/"))
+            {
+                return DownloadUrl(resourcePath);
+            }
+
+            try
+            {
+                WebClient webClient = new WebClient();
+                Uri baseUri = new Uri(siteUrl);
+                Uri uri = new Uri(baseUri, resourcePath);
+                return webClient.DownloadString(uri);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
