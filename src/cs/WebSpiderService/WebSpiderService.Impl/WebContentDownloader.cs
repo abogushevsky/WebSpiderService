@@ -75,7 +75,9 @@ namespace WebSpiderService.Impl
         /// <returns></returns>
         public string DownloadSiteResourse(string siteUrl, string resourcePath)
         {
-            if (!resourcePath.StartsWith("/"))
+            string link = resourcePath.Replace("href=\"", "").Replace("\"", "");
+
+            if (!link.StartsWith("/"))
             {
                 return DownloadUrl(resourcePath);
             }
@@ -84,7 +86,7 @@ namespace WebSpiderService.Impl
             {
                 WebClient webClient = new WebClient();
                 Uri baseUri = new Uri(siteUrl);
-                Uri uri = new Uri(baseUri, resourcePath);
+                Uri uri = new Uri(baseUri, link);
                 return webClient.DownloadString(uri);
             }
             catch

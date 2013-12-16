@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
 
 namespace WebSpiderService.Impl
@@ -39,17 +40,24 @@ namespace WebSpiderService.Impl
 
             foreach (string docFileName in documentsFileNames)
             {
-                string documentContent = GetDocumentContentFromFile(docFileName);
-                string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(documentContent);
-                string linksDocFileName = docFileName.Replace("txt", "") + "_links.txt";
-                StringBuilder linksBuilder = new StringBuilder();
+                Document parentDocument = GetDocumentContentFromFile(docFileName);
+                string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument.Content);
+                string linksDocFileName = docFileName.Replace("txt", "");
+                Directory.CreateDirectory(linksDocFileName);
+                //linksDocFileName = linksDocFileName + "_links.txt";
+                //StringBuilder linksBuilder = new StringBuilder();
                 foreach (string url in documentUrls)
                 {
-                    linksBuilder.AppendLine(url);
-                }
-                SaveContentToFile(linksDocFileName, linksBuilder.ToString());
+                    string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, url);
+                    if (document != null)
+                    {
+                        SaveDocument(url, document, linksDocFileName);
+                    }
 
-                //DownloadDocuments(documentUrls);   
+                  //  linksBuilder.AppendLine(url);
+                }
+
+                //SaveContentToFile(linksDocFileName, linksBuilder.ToString());
             }
         }
 
@@ -65,15 +73,20 @@ namespace WebSpiderService.Impl
             });
         }
 
-        private string GetDocumentContentFromFile(string docFileName)
+        private Document GetDocumentContentFromFile(string docFileName)
         {
+            Document result = new Document();
+
             using (FileStream fs = new FileStream(docFileName, FileMode.Open))
             {
                 using (StreamReader reader = new StreamReader(fs))
                 {
-                    return reader.ReadToEnd();
+                    result.Url = reader.ReadLine();
+                    result.Content = reader.ReadToEnd();
                 }
             }
+
+            return result;
         }
 
         private string[] GetUrls()
@@ -99,9 +112,13 @@ namespace WebSpiderService.Impl
             return result.ToArray();
         }
 
-        private void SaveDocument(string url, string document)
+        private void SaveDocument(string url, string document, string subfolderName = null)
         {
-            string documentFilePath = string.Format("{0}\\{1}.txt", Properties.Settings.Default.DocumentsFolderPath,
+            string filePath = !string.IsNullOrEmpty(subfolderName) ? 
+                string.Format("{0}\\{1}", Properties.Settings.Default.DocumentsFolderPath, subfolderName) : 
+                Properties.Settings.Default.DocumentsFolderPath;
+
+            string documentFilePath = string.Format("{0}\\{1}.txt", filePath,
                 url.Replace("/", "").Replace(":", ""));
 
             StringBuilder fileContentBuilder = new StringBuilder();
