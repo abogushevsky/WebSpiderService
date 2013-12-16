@@ -47,7 +47,15 @@ namespace WebSpiderService.Impl
             {
                 string documentContent = GetDocumentContentFromFile(docFileName);
                 string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(documentContent);
-                DownloadDocuments(documentUrls);   
+                string linksDocFileName = docFileName.Replace("txt", "") + "_links.txt";
+                StringBuilder linksBuilder = new StringBuilder();
+                foreach (string url in documentUrls)
+                {
+                    linksBuilder.AppendLine(url);
+                }
+                SaveContentToFile(linksDocFileName, linksBuilder.ToString());
+
+                //DownloadDocuments(documentUrls);   
             }
         }
 
@@ -102,12 +110,19 @@ namespace WebSpiderService.Impl
             string documentFilePath = string.Format("{0}\\{1}.txt", Properties.Settings.Default.DocumentsFolderPath,
                 url.Replace("/", "").Replace(":", ""));
 
-            using (FileStream fs = new FileStream(documentFilePath, FileMode.Create))
+            StringBuilder fileContentBuilder = new StringBuilder();
+            fileContentBuilder.AppendLine(url);
+            fileContentBuilder.Append(document);
+            SaveContentToFile(documentFilePath, fileContentBuilder.ToString());
+        }
+
+        private void SaveContentToFile(string fileName, string content)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {
-                    writer.WriteLine(url);
-                    writer.Write(document);
+                    writer.WriteLine(content);
                 }
             }
         }
