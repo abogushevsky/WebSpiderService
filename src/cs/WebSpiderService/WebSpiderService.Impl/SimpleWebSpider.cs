@@ -36,12 +36,6 @@ namespace WebSpiderService.Impl
             DownloadDocuments(GetUrls());
 
             string[] documentsFileNames = Directory.GetFiles(Properties.Settings.Default.DocumentsFolderPath);
-            //Parallel.ForEach(documentsFileNames, (docFileName) =>
-            //{
-            //    string documentContent = GetDocumentContentFromFile(docFileName);
-            //    string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(documentContent);
-            //    DownloadDocuments(documentUrls);
-            //});
 
             foreach (string docFileName in documentsFileNames)
             {

@@ -23,6 +23,17 @@ namespace WebSpiderService.Impl
         }
 
         /// <summary>
+        /// Method asynchronously downloads site resourse by full or relative path
+        /// </summary>
+        /// <param name="siteUrl"></param>
+        /// <param name="resourcePath"></param>
+        /// <returns></returns>
+        public Task<string> DownloadSiteResourseAsync(string siteUrl, string resourcePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Method dowloads page content
         /// </summary>
         /// <param name="url"></param>
@@ -39,6 +50,17 @@ namespace WebSpiderService.Impl
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Method downloads site resourse by full or relative path
+        /// </summary>
+        /// <param name="siteUrl"></param>
+        /// <param name="resourcePath"></param>
+        /// <returns></returns>
+        public string DownloadSiteResourse(string siteUrl, string resourcePath)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -23,9 +23,7 @@ namespace WebSpiderService.Impl
             Contract.Requires(documentContent != null);
 
             List<string> result = new List<string>();
-
             MatchCollection matches = this._hrefRegex.Matches(documentContent);
-
             foreach (Match match in matches)
             {
                 result.Add(match.Value);
