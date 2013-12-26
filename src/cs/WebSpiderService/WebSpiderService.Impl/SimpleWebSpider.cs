@@ -42,8 +42,8 @@ namespace WebSpiderService.Impl
             {
                 Document parentDocument = GetDocumentContentFromFile(docFileName);
                 string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument.Content);
-                string linksDocFileName = docFileName.Replace("txt", "");
-                Directory.CreateDirectory(linksDocFileName);
+                string linksFolder = docFileName.Replace(".txt", "");
+                Directory.CreateDirectory(linksFolder);
                 //linksDocFileName = linksDocFileName + "_links.txt";
                 //StringBuilder linksBuilder = new StringBuilder();
                 foreach (string url in documentUrls)
@@ -51,7 +51,7 @@ namespace WebSpiderService.Impl
                     string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, url);
                     if (document != null)
                     {
-                        SaveDocument(url, document, linksDocFileName);
+                        SaveDocument(url, document, linksFolder.Substring(linksFolder.LastIndexOf('\\')));
                     }
 
                   //  linksBuilder.AppendLine(url);

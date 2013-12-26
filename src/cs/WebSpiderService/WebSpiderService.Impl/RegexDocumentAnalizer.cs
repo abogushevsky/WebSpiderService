@@ -26,10 +26,20 @@ namespace WebSpiderService.Impl
             MatchCollection matches = this._hrefRegex.Matches(documentContent);
             foreach (Match match in matches)
             {
-                result.Add(match.Value);
+                result.Add(RemoveHref(match.Value));
             }
 
             return result.ToArray();
+        }
+
+        private string RemoveHref(string source)
+        {
+            if (source.Contains("href"))
+            {
+                return source.Replace("href=\"", "").Replace("\"", "");
+            }
+
+            return source;
         }
     }
 }
