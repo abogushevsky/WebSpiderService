@@ -38,12 +38,14 @@ namespace WebSpiderService.Impl
 
             string[] documentsFileNames = Directory.GetFiles(Properties.Settings.Default.DocumentsFolderPath);
 
+            int linkId = 0;
             foreach (string docFileName in documentsFileNames)
             {
                 Document parentDocument = GetDocumentContentFromFile(docFileName);
                 string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument.Content);
                 string linksFolder = docFileName.Replace(".txt", "");
-                Directory.CreateDirectory(linksFolder);
+                linksFolder = linksFolder.Substring(linksFolder.LastIndexOf('\\'));
+                //Directory.CreateDirectory(linksFolder);
                 //linksDocFileName = linksDocFileName + "_links.txt";
                 //StringBuilder linksBuilder = new StringBuilder();
                 foreach (string url in documentUrls)
@@ -51,12 +53,13 @@ namespace WebSpiderService.Impl
                     string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, url);
                     if (document != null)
                     {
-                        SaveDocument(url, document, linksFolder.Substring(linksFolder.LastIndexOf('\\')));
+                        SaveDocument(url, document, linksFolder, linkId.ToString());
                     }
 
                   //  linksBuilder.AppendLine(url);
                 }
 
+                linkId++;
                 //SaveContentToFile(linksDocFileName, linksBuilder.ToString());
             }
         }
@@ -112,14 +115,14 @@ namespace WebSpiderService.Impl
             return result.ToArray();
         }
 
-        private void SaveDocument(string url, string document, string subfolderName = null)
+        private void SaveDocument(string url, string document, string subfolderName = null, string fileName = null)
         {
             string filePath = !string.IsNullOrEmpty(subfolderName) ? 
                 string.Format("{0}\\{1}", Properties.Settings.Default.DocumentsFolderPath, subfolderName) : 
                 Properties.Settings.Default.DocumentsFolderPath;
 
             string documentFilePath = string.Format("{0}\\{1}.txt", filePath,
-                url.Replace("/", "").Replace(":", ""));
+                !string.IsNullOrEmpty(fileName) ? fileName : RemoveInvalidCharacters(url));
 
             StringBuilder fileContentBuilder = new StringBuilder();
             fileContentBuilder.AppendLine(url);
@@ -129,6 +132,12 @@ namespace WebSpiderService.Impl
 
         private void SaveContentToFile(string fileName, string content)
         {
+            string directory = fileName.Substring(0, fileName.LastIndexOf('\\'));
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
@@ -136,6 +145,11 @@ namespace WebSpiderService.Impl
                     writer.WriteLine(content);
                 }
             }
+        }
+
+        private string RemoveInvalidCharacters(string source)
+        {
+            return source.Replace("/", "").Replace(":", "");
         }
     }
 }
