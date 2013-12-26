@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
@@ -15,6 +16,8 @@ namespace WebSpiderService.Impl
     /// </summary>
     public class SimpleWebSpider : ISpiderService
     {
+        private ConcurrentBag<Document> _docsContainer;
+ 
         private long _currentDocumentIndex;
         private readonly IContentDownloader _contentDownloader;
         private readonly IDocumentAnalizer _documentAnalizer;
@@ -27,6 +30,8 @@ namespace WebSpiderService.Impl
             this._contentDownloader = contentDownloader;
             this._documentAnalizer = documentAnalizer;
             this._currentDocumentIndex = 0;
+
+            this._docsContainer = new ConcurrentBag<Document>();
         }
 
         /// <summary>
@@ -47,10 +52,16 @@ namespace WebSpiderService.Impl
                 
                 Parallel.For(0, documentUrls.Length, (i) =>
                 {
-                    string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
-                    if (document != null)
+                    string documentContent = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
+                    if (documentContent != null)
                     {
-                        SaveDocument(documentUrls[i], document, linksFolder, i.ToString());
+                        this._docsContainer.Add(new Document()
+                        {
+                            Url = documentUrls[i],
+                            Content = documentContent
+                        });
+
+                        //SaveDocument(documentUrls[i], documentContent, linksFolder, i.ToString());
                     }
                 });
             });
