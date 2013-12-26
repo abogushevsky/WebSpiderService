@@ -38,7 +38,6 @@ namespace WebSpiderService.Impl
 
             string[] documentsFileNames = Directory.GetFiles(Properties.Settings.Default.DocumentsFolderPath);
 
-            int linkId = 0;
             foreach (string docFileName in documentsFileNames)
             {
                 Document parentDocument = GetDocumentContentFromFile(docFileName);
@@ -48,6 +47,7 @@ namespace WebSpiderService.Impl
                 //Directory.CreateDirectory(linksFolder);
                 //linksDocFileName = linksDocFileName + "_links.txt";
                 //StringBuilder linksBuilder = new StringBuilder();
+                int linkId = 0;
                 foreach (string url in documentUrls)
                 {
                     string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, url);
@@ -56,10 +56,10 @@ namespace WebSpiderService.Impl
                         SaveDocument(url, document, linksFolder, linkId.ToString());
                     }
 
+                    linkId++;
+
                   //  linksBuilder.AppendLine(url);
                 }
-
-                linkId++;
                 //SaveContentToFile(linksDocFileName, linksBuilder.ToString());
             }
         }
