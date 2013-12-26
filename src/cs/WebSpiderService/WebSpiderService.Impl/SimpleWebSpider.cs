@@ -44,23 +44,15 @@ namespace WebSpiderService.Impl
                 string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument.Content);
                 string linksFolder = docFileName.Replace(".txt", "");
                 linksFolder = linksFolder.Substring(linksFolder.LastIndexOf('\\'));
-                //Directory.CreateDirectory(linksFolder);
-                //linksDocFileName = linksDocFileName + "_links.txt";
-                //StringBuilder linksBuilder = new StringBuilder();
-                int linkId = 0;
+                
                 Parallel.For(0, documentUrls.Length, (i) =>
                 {
                     string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
                     if (document != null)
                     {
-                        SaveDocument(documentUrls[i], document, linksFolder, linkId.ToString());
+                        SaveDocument(documentUrls[i], document, linksFolder, i.ToString());
                     }
-
-                    linkId++;
-
-                    //  linksBuilder.AppendLine(url);
                 });
-                //SaveContentToFile(linksDocFileName, linksBuilder.ToString());
             });
         }
 
