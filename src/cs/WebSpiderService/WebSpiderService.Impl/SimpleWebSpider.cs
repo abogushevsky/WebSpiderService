@@ -38,7 +38,7 @@ namespace WebSpiderService.Impl
 
             string[] documentsFileNames = Directory.GetFiles(Properties.Settings.Default.DocumentsFolderPath);
 
-            foreach (string docFileName in documentsFileNames)
+            Parallel.ForEach(documentsFileNames, (docFileName) =>
             {
                 Document parentDocument = GetDocumentContentFromFile(docFileName);
                 string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument.Content);
@@ -48,20 +48,20 @@ namespace WebSpiderService.Impl
                 //linksDocFileName = linksDocFileName + "_links.txt";
                 //StringBuilder linksBuilder = new StringBuilder();
                 int linkId = 0;
-                foreach (string url in documentUrls)
+                Parallel.For(0, documentUrls.Length, (i) =>
                 {
-                    string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, url);
+                    string document = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
                     if (document != null)
                     {
-                        SaveDocument(url, document, linksFolder, linkId.ToString());
+                        SaveDocument(documentUrls[i], document, linksFolder, linkId.ToString());
                     }
 
                     linkId++;
 
-                  //  linksBuilder.AppendLine(url);
-                }
+                    //  linksBuilder.AppendLine(url);
+                });
                 //SaveContentToFile(linksDocFileName, linksBuilder.ToString());
-            }
+            });
         }
 
         private void DownloadDocuments(string[] urlsToDownload)
