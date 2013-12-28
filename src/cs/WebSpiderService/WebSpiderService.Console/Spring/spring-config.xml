@@ -15,11 +15,15 @@
   <object id="WebSpiderService" type="WebSpiderService.Impl.SimpleWebSpider, WebSpiderService.Impl">
     <constructor-arg name="contentDownloader" ref="WebContentDownloader"></constructor-arg>
     <constructor-arg name="documentAnalizer" ref="RegexDocumentAnalizer"></constructor-arg>
+    <constructor-arg name="linksRepository" ref="SqlLinksRepository"></constructor-arg>
   </object>
 
   <object id="WebContentDownloader" type="WebSpiderService.Impl.WebContentDownloader, WebSpiderService.Impl">
   </object>
 
   <object id="RegexDocumentAnalizer" type="WebSpiderService.Impl.RegexDocumentAnalizer, WebSpiderService.Impl">
+  </object>
+
+  <object id="SqlLinksRepository" type="WebSpiderService.Db.Sql.SqlLinksRepository, WebSpiderService.Db.Sql">
   </object>
 </objects>

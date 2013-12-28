@@ -16,22 +16,25 @@ namespace WebSpiderService.Impl
     /// </summary>
     public class SimpleWebSpider : ISpiderService
     {
-        private ConcurrentBag<Document> _docsContainer;
+        private ConcurrentBag<LinkResult> _docsContainer;
  
         private long _currentDocumentIndex;
         private readonly IContentDownloader _contentDownloader;
         private readonly IDocumentAnalizer _documentAnalizer;
+        private readonly ILinksRepository _linksRepository;
 
-        public SimpleWebSpider(IContentDownloader contentDownloader, IDocumentAnalizer documentAnalizer)
+        public SimpleWebSpider(IContentDownloader contentDownloader, IDocumentAnalizer documentAnalizer, ILinksRepository linksRepository)
         {
             Contract.Requires(contentDownloader != null);
             Contract.Requires(documentAnalizer != null);
+            Contract.Requires(linksRepository != null);
 
             this._contentDownloader = contentDownloader;
             this._documentAnalizer = documentAnalizer;
+            this._linksRepository = linksRepository;
             this._currentDocumentIndex = 0;
 
-            this._docsContainer = new ConcurrentBag<Document>();
+            this._docsContainer = new ConcurrentBag<LinkResult>();
         }
 
         /// <summary>
@@ -52,14 +55,11 @@ namespace WebSpiderService.Impl
                 
                 Parallel.For(0, documentUrls.Length, (i) =>
                 {
-                    string documentContent = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
-                    if (documentContent != null)
+                    LinkResult linkDownloadResult = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
+                    if (linkDownloadResult != null)
                     {
-                        this._docsContainer.Add(new Document()
-                        {
-                            Url = documentUrls[i],
-                            Content = documentContent
-                        });
+                        this._linksRepository.SaveLink(linkDownloadResult.Link);
+                        this._docsContainer.Add(linkDownloadResult);
 
                         //SaveDocument(documentUrls[i], documentContent, linksFolder, i.ToString());
                     }
@@ -71,10 +71,10 @@ namespace WebSpiderService.Impl
         {
             Parallel.ForEach(urlsToDownload, (url) =>
             {
-                string document = this._contentDownloader.DownloadUrl(url);
-                if (!string.IsNullOrEmpty(document))
+                LinkResult linkDownloadResult = this._contentDownloader.DownloadUrl(url);
+                if (linkDownloadResult.Content != null)
                 {
-                    SaveDocument(url, document);
+                    SaveDocument(url, linkDownloadResult.Content);
                 }
             });
         }

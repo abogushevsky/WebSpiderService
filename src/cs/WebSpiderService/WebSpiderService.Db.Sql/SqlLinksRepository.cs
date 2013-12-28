@@ -11,31 +11,35 @@ namespace WebSpiderService.Db.Sql
             Contract.Requires(link != null);
             Contract.Requires(link.LinkContentType != null);
             Contract.Requires(!string.IsNullOrEmpty(link.LinkContentType.ContentType));
-
-            using (WebSpiderDBEntities context = new WebSpiderDBEntities())
+            lock (this)
             {
-                ContentType contentType = context.ContentTypes.SingleOrDefault(ct => ct.LinkContentType == link.LinkContentType.ContentType);
-                if (contentType == null)
+                using (WebSpiderDBEntities context = new WebSpiderDBEntities())
                 {
-                    contentType = new ContentType()
+                    ContentType contentType =
+                        context.ContentTypes.SingleOrDefault(
+                            ct => ct.LinkContentType == link.LinkContentType.ContentType);
+                    if (contentType == null)
                     {
-                        LinkContentType = link.LinkContentType.ContentType
+                        contentType = new ContentType()
+                        {
+                            LinkContentType = link.LinkContentType.ContentType
+                        };
+                        context.ContentTypes.Add(contentType);
+                    }
+
+                    Link newLink = new Link()
+                    {
+                        ContentType = contentType,
+                        ContentTypeId = contentType.Id,
+                        ParentId = link.ParentId,
+                        Url = link.Url
                     };
-                    context.ContentTypes.Add(contentType);
+
+                    context.Links.Add(newLink);
+                    context.SaveChanges();
+
+                    return newLink.Id;
                 }
-
-                Link newLink = new Link()
-                {
-                    ContentType = contentType,
-                    ContentTypeId = contentType.Id,
-                    ParentId = link.ParentId,
-                    Url = link.Url
-                };
-
-                context.Links.Add(newLink);
-                context.SaveChanges();
-
-                return newLink.Id;
             }
         }
     }

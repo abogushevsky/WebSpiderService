@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
 
 namespace WebSpiderService.Impl
@@ -16,10 +17,11 @@ namespace WebSpiderService.Impl
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public async Task<string> DownloadUrlAsync(string url)
+        public async Task<LinkResult> DownloadUrlAsync(string url)
         {
-            WebClient webClient = new WebClient();
-            return await webClient.DownloadStringTaskAsync(new Uri(url));
+            throw new NotImplementedException();
+            //WebClient webClient = new WebClient();
+            //return await webClient.DownloadStringTaskAsync(new Uri(url));
         }
 
         /// <summary>
@@ -28,24 +30,26 @@ namespace WebSpiderService.Impl
         /// <param name="siteUrl"></param>
         /// <param name="resourcePath"></param>
         /// <returns></returns>
-        public async Task<string> DownloadSiteResourseAsync(string siteUrl, string resourcePath)
+        public async Task<LinkResult> DownloadSiteResourseAsync(string siteUrl, string resourcePath)
         {
-            if (!resourcePath.StartsWith("/"))
-            {
-                return await DownloadUrlAsync(resourcePath);
-            }
+            throw new NotImplementedException();
 
-            try
-            {
-                WebClient webClient = new WebClient();
-                Uri baseUri = new Uri(siteUrl);
-                Uri uri = new Uri(baseUri, resourcePath);
-                return await webClient.DownloadStringTaskAsync(uri);
-            }
-            catch
-            {
-                return null;
-            }
+            //if (!resourcePath.StartsWith("/"))
+            //{
+            //    return await DownloadUrlAsync(resourcePath);
+            //}
+
+            //try
+            //{
+            //    WebClient webClient = new WebClient();
+            //    Uri baseUri = new Uri(siteUrl);
+            //    Uri uri = new Uri(baseUri, resourcePath);
+            //    return await webClient.DownloadStringTaskAsync(uri);
+            //}
+            //catch
+            //{
+            //    return null;
+            //}
         }
 
         /// <summary>
@@ -53,18 +57,28 @@ namespace WebSpiderService.Impl
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public string DownloadUrl(string url)
+        public LinkResult DownloadUrl(string url)
         {
+            LinkResult result = new LinkResult();
+            result.Link = new Link();
+            result.Link.Url = url;
+
             try
             {
                 WebClient webClient = new WebClient();
                 Uri uri = new Uri(url, UriKind.RelativeOrAbsolute);
-                return webClient.DownloadString(uri);
+                result.Content = webClient.DownloadString(uri);
+                result.Link.LinkContentType = new LinkContentType()
+                {
+                    ContentType = webClient.ResponseHeaders.Get("Content-Type")
+                };
             }
             catch
             {
-                return null;
+                //log
             }
+
+            return result;
         }
 
         /// <summary>
@@ -73,24 +87,34 @@ namespace WebSpiderService.Impl
         /// <param name="siteUrl"></param>
         /// <param name="resourcePath"></param>
         /// <returns></returns>
-        public string DownloadSiteResourse(string siteUrl, string resourcePath)
+        public LinkResult DownloadSiteResourse(string siteUrl, string resourcePath)
         {
             if (!resourcePath.StartsWith("/"))
             {
                 return DownloadUrl(resourcePath);
             }
 
+            LinkResult result = new LinkResult();
+            result.Link = new Link();
+
             try
             {
                 WebClient webClient = new WebClient();
                 Uri baseUri = new Uri(siteUrl);
                 Uri uri = new Uri(baseUri, resourcePath);
-                return webClient.DownloadString(uri);
+                result.Link.Url = uri.ToString();
+                result.Content = webClient.DownloadString(uri);
+                result.Link.LinkContentType = new LinkContentType()
+                {
+                    ContentType = webClient.ResponseHeaders.Get("Content-Type")
+                };
             }
             catch
             {
-                return null;
+               
             }
+
+            return result;
         }
     }
 }
