@@ -40,8 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\Link.cs" />
+    <Compile Include="Entities\LinkContentType.cs" />
+    <Compile Include="Entities\LinkStatuses.cs" />
     <Compile Include="Interfaces\IContentDownloader.cs" />
     <Compile Include="Interfaces\IDocumentAnalizer.cs" />
+    <Compile Include="Interfaces\ILinksRepository.cs" />
     <Compile Include="Interfaces\ISpiderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

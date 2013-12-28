@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.WinService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Impl", "WebSpiderService.Impl\WebSpiderService.Impl.csproj", "{E15EEB27-A7C7-4405-AE17-B791D29C8909}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebSpiderDB", "WebSpiderDB\WebSpiderDB.sqlproj", "{AA93B2E1-FE9A-44BE-8502-501559990D69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Db.Sql", "WebSpiderService.Db.Sql\WebSpiderService.Db.Sql.csproj", "{452C0438-02A2-472D-B7AC-90E0FD457BD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,16 @@ Global
 		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E15EEB27-A7C7-4405-AE17-B791D29C8909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA93B2E1-FE9A-44BE-8502-501559990D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA93B2E1-FE9A-44BE-8502-501559990D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA93B2E1-FE9A-44BE-8502-501559990D69}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AA93B2E1-FE9A-44BE-8502-501559990D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA93B2E1-FE9A-44BE-8502-501559990D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA93B2E1-FE9A-44BE-8502-501559990D69}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1362b9126c904b39a45a2a9638ca708e" Name="Diagram1" >
+        <EntityTypeShape EntityType="WebSpiderDBModel.ContentType" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="WebSpiderDBModel.Link" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="WebSpiderDBModel.FK_Links_ContentTypes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
