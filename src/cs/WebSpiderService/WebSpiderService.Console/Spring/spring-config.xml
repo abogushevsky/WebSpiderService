@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <!-- App.config appSettings import -->
+  <object type="Spring.Objects.Factory.Config.VariablePlaceholderConfigurer, Spring.Core">
+    <property name="VariableSources">
+      <list>
+        <object type="Spring.Objects.Factory.Config.ConnectionStringsVariableSource, Spring.Core" />
+        <object type="Spring.Objects.Factory.Config.ConfigSectionVariableSource, Spring.Core">
+          <property name="SectionNames" value="appSettings" />
+        </object>
+      </list>
+    </property>
+  </object>
+
+  <object id="WebSpiderService" type="WebSpiderService.Impl.SimpleWebSpider, WebSpiderService.Impl">
+    <constructor-arg name="contentDownloader" ref="WebContentDownloader"></constructor-arg>
+    <constructor-arg name="documentAnalizer" ref="RegexDocumentAnalizer"></constructor-arg>
+  </object>
+
+  <object id="WebContentDownloader" type="WebSpiderService.Impl.WebContentDownloader, WebSpiderService.Impl">
+  </object>
+
+  <object id="RegexDocumentAnalizer" type="WebSpiderService.Impl.RegexDocumentAnalizer, WebSpiderService.Impl">
+  </object>
+</objects>
