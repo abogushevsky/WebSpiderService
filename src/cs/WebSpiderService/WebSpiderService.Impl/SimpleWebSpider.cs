@@ -75,7 +75,6 @@ namespace WebSpiderService.Impl
                         }
 
                         this._docsContainer.Add(linkDownloadResult);
-                        //SaveDocument(documentUrls[i], documentContent, linksFolder, i.ToString());
                     }
                 });
             });
