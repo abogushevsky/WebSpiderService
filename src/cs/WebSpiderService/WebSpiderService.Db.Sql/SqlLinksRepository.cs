@@ -21,20 +21,20 @@ namespace WebSpiderService.Db.Sql
             }
 
             using (WebSpiderDbContext context = new WebSpiderDbContext())
-            {
+                {
                 LinkContentType contentType =
                     context.LinkContentTypes.SingleOrDefault(
                         ct => ct.ContentType == link.LinkContentType.ContentType);
 
-                if (contentType == null)
-                {
-                    contentType = new LinkContentType()
+                    if (contentType == null)
                     {
+                    contentType = new LinkContentType()
+                        {
                         Id = Guid.NewGuid(),
                         ContentType = link.LinkContentType.ContentType,
                         FileExtension = link.LinkContentType.FileExtension
-                    };
-                }
+                        };
+                    }
 
                 link.LinkContentType = contentType;
                 link.LinkContentTypeId = contentType.Id;
@@ -42,7 +42,7 @@ namespace WebSpiderService.Db.Sql
                 context.Links.Add(link);
 
                 try
-                {
+                    {
                     context.SaveChanges();
                 }
                 catch (Exception ex)
@@ -54,4 +54,3 @@ namespace WebSpiderService.Db.Sql
             return link.Id;
         }
     }
-}
