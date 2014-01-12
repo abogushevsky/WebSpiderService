@@ -9,5 +9,10 @@
         /// Method is intended to download all documents
         /// </summary>
         void DowloadDocuments();
+
+        /// <summary>
+        /// Clears all stored data collected by the spider
+        /// </summary>
+        void ClearRepositories();
     }
 }

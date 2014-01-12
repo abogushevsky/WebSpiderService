@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{479CFEF8-044C-42F5-8A88-CF5A543A84C1}</ProjectGuid>
+    <ProjectGuid>{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebSpiderService.Common</RootNamespace>
-    <AssemblyName>WebSpiderService.Common</AssemblyName>
+    <RootNamespace>WebSpiderService.Db.Mongo</RootNamespace>
+    <AssemblyName>WebSpiderService.Db.Mongo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,7 +37,6 @@
       <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,21 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Document.cs" />
-    <Compile Include="Entities\Link.cs" />
-    <Compile Include="Entities\LinkContentType.cs" />
-    <Compile Include="Entities\LinkResult.cs" />
-    <Compile Include="Entities\LinkStatuses.cs" />
-    <Compile Include="Interfaces\IContentDownloader.cs" />
-    <Compile Include="Interfaces\IDocumentAnalizer.cs" />
-    <Compile Include="Interfaces\IDocumentsRepository.cs" />
-    <Compile Include="Interfaces\ILinksRepository.cs" />
-    <Compile Include="Interfaces\ISpiderService.cs" />
+    <Compile Include="MongoDbDocumentsRepository.cs" />
+    <Compile Include="MongoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebSpiderService.Common\WebSpiderService.Common.csproj">
+      <Project>{479CFEF8-044C-42F5-8A88-CF5A543A84C1}</Project>
+      <Name>WebSpiderService.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

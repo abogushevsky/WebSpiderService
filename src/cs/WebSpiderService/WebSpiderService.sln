@@ -19,6 +19,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebSpiderDB", "WebSpiderDB\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Db.Sql", "WebSpiderService.Db.Sql\WebSpiderService.Db.Sql.csproj", "{452C0438-02A2-472D-B7AC-90E0FD457BD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Db.Mongo", "WebSpiderService.Db.Mongo\WebSpiderService.Db.Mongo.csproj", "{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{452C0438-02A2-472D-B7AC-90E0FD457BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

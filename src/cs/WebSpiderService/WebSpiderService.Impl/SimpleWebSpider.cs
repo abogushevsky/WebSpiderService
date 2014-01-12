@@ -22,16 +22,19 @@ namespace WebSpiderService.Impl
         private readonly IContentDownloader _contentDownloader;
         private readonly IDocumentAnalizer _documentAnalizer;
         private readonly ILinksRepository _linksRepository;
+        private readonly IDocumentsRepository _documentsRepository;
 
-        public SimpleWebSpider(IContentDownloader contentDownloader, IDocumentAnalizer documentAnalizer, ILinksRepository linksRepository)
+        public SimpleWebSpider(IContentDownloader contentDownloader, IDocumentAnalizer documentAnalizer, ILinksRepository linksRepository, IDocumentsRepository documentsRepository)
         {
             Contract.Requires(contentDownloader != null);
             Contract.Requires(documentAnalizer != null);
             Contract.Requires(linksRepository != null);
+            Contract.Requires(documentsRepository != null);
 
             this._contentDownloader = contentDownloader;
             this._documentAnalizer = documentAnalizer;
             this._linksRepository = linksRepository;
+            this._documentsRepository = documentsRepository;
             this._currentDocumentIndex = 0;
 
             this._docsContainer = new ConcurrentBag<LinkResult>();
@@ -62,14 +65,28 @@ namespace WebSpiderService.Impl
                         {
                             linkDownloadResult.Link.ParentId = parentDocument.LinkId;
                             this._linksRepository.SaveLink(linkDownloadResult.Link);
+                            this._documentsRepository.StoreDocument(new Document()
+                            {
+                                Content = linkDownloadResult.Content,
+                                DownloadDate = DateTime.Now,
+                                LinkId = linkDownloadResult.Link.Id,
+                                Url = linkDownloadResult.Link.Url
+                            });
                         }
 
                         this._docsContainer.Add(linkDownloadResult);
-
                         //SaveDocument(documentUrls[i], documentContent, linksFolder, i.ToString());
                     }
                 });
             });
+        }
+
+        /// <summary>
+        /// Clears all stored data collected by the spider
+        /// </summary>
+        public void ClearRepositories()
+        {
+            this._documentsRepository.RemoveAllDocuments();
         }
 
         private void DownloadDocuments(string[] urlsToDownload)
@@ -83,6 +100,13 @@ namespace WebSpiderService.Impl
                     if (linkDownloadResult.Link != null && linkDownloadResult.Link.LinkContentType != null)
                     {
                         linkId = this._linksRepository.SaveLink(linkDownloadResult.Link);
+                        this._documentsRepository.StoreDocument(new Document()
+                        {
+                            Content = linkDownloadResult.Content,
+                            DownloadDate = DateTime.Now,
+                            LinkId = linkDownloadResult.Link.Id,
+                            Url = linkDownloadResult.Link.Url
+                        });
                     }
 
                     SaveDocument(url, linkId, linkDownloadResult.Content);

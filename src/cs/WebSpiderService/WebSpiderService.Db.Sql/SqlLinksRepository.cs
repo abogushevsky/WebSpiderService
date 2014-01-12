@@ -20,36 +20,42 @@ namespace WebSpiderService.Db.Sql
                 link.CreatedDate = DateTime.Now;
             }
 
-            using (WebSpiderDbContext context = new WebSpiderDbContext())
+            lock (this)
             {
-                LinkContentType contentType =
-                    context.LinkContentTypes.SingleOrDefault(
-                        ct => ct.ContentType == link.LinkContentType.ContentType);
-
-                if (contentType == null)
+                using (WebSpiderDbContext context = new WebSpiderDbContext())
                 {
-                    contentType = new LinkContentType()
+                    LinkContentType contentType =
+                        context.LinkContentTypes.SingleOrDefault(
+                            ct =>
+                                ct.ContentType.Equals(link.LinkContentType.ContentType,
+                                    StringComparison.InvariantCultureIgnoreCase));
+
+                    if (contentType == null)
                     {
-                        Id = Guid.NewGuid(),
-                        ContentType = link.LinkContentType.ContentType,
-                        FileExtension = link.LinkContentType.FileExtension
-                    };
-                }
+                        contentType = new LinkContentType()
+                        {
+                            Id = Guid.NewGuid(),
+                            ContentType = link.LinkContentType.ContentType,
+                            FileExtension = link.LinkContentType.FileExtension
+                        };
+                    }
 
-                link.LinkContentType = contentType;
-                link.LinkContentTypeId = contentType.Id;
+                    link.LinkContentType = contentType;
+                    link.LinkContentTypeId = contentType.Id;
 
-                context.Links.Add(link);
+                    context.Links.Add(link);
 
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    return Guid.Empty;
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        return Guid.Empty;
+                    }
                 }
             }
+
             return link.Id;
         }
 

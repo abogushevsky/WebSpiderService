@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Spring.Context;
 using Spring.Context.Support;
 using WebSpiderService.Common.Interfaces;
+using WebSpiderService.Db.Mongo;
 using WebSpiderService.Impl;
 
 namespace WebSpiderService.Console
@@ -27,6 +28,7 @@ namespace WebSpiderService.Console
             System.Console.ReadKey();
             System.Console.WriteLine("Downloading...");
 
+            spiderService.ClearRepositories();
             spiderService.DowloadDocuments();
 
             System.Console.WriteLine("Done! Press any ket to stop application");

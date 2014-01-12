@@ -1,4 +1,5 @@
 ﻿using System;
+using MongoDB.Bson;
 
 namespace WebSpiderService.Common.Entities
 {
@@ -7,13 +8,18 @@ namespace WebSpiderService.Common.Entities
     /// </summary>
     public class Document
     {
+        ///// <summary>
+        ///// Document Id
+        ///// </summary>
+        public ObjectId Id { get; set; }
+
         /// <summary>
         /// Url of the document
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        /// Link id from data storage
+        /// Link id from links storage
         /// </summary>
         public Guid LinkId { get; set; }
 
@@ -21,5 +27,10 @@ namespace WebSpiderService.Common.Entities
         /// Document content
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// Document download date
+        /// </summary>
+        public DateTime DownloadDate { get; set; }
     }
 }

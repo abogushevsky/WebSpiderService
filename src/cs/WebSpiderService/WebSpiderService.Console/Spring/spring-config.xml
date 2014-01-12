@@ -16,6 +16,7 @@
     <constructor-arg name="contentDownloader" ref="WebContentDownloader"></constructor-arg>
     <constructor-arg name="documentAnalizer" ref="RegexDocumentAnalizer"></constructor-arg>
     <constructor-arg name="linksRepository" ref="SqlLinksRepository"></constructor-arg>
+    <constructor-arg name="documentsRepository" ref="MongoDbDocumentsRepository"></constructor-arg>
   </object>
 
   <object id="WebContentDownloader" type="WebSpiderService.Impl.WebContentDownloader, WebSpiderService.Impl">
@@ -25,5 +26,9 @@
   </object>
 
   <object id="SqlLinksRepository" type="WebSpiderService.Db.Sql.SqlLinksRepository, WebSpiderService.Db.Sql">
+  </object>
+
+  <object id="MongoDbDocumentsRepository" type="WebSpiderService.Db.Mongo.MongoDbDocumentsRepository, WebSpiderService.Db.Mongo">
+    <constructor-arg name="connectionString" value="mongodb://localhost"></constructor-arg>
   </object>
 </objects>

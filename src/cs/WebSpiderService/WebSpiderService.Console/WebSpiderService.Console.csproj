@@ -82,6 +82,10 @@
       <Project>{479CFEF8-044C-42F5-8A88-CF5A543A84C1}</Project>
       <Name>WebSpiderService.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebSpiderService.Db.Mongo\WebSpiderService.Db.Mongo.csproj">
+      <Project>{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}</Project>
+      <Name>WebSpiderService.Db.Mongo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebSpiderService.Db.Sql\WebSpiderService.Db.Sql.csproj">
       <Project>{452c0438-02a2-472d-b7ac-90e0fd457bd8}</Project>
       <Name>WebSpiderService.Db.Sql</Name>
