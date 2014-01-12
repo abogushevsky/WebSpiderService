@@ -11,26 +11,20 @@ namespace WebSpiderService.Common.Entities
         [Key]
         public Guid Id { get; set; }
 
-      //  [Column("ParentId")]
         public Guid? ParentId { get; set; }
 
         [ForeignKey("ParentId")]
-       // [InverseProperty("Links")]
         public virtual Link Parent { get; set; }
 
-       // [Column("Url")]
         [MaxLength(512)]
         [Required]
         public string Url { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
-      //  [Column("LinkContentTypeId")]
-     //   [Required]
+        [Required]
         public Guid LinkContentTypeId { get; set; }
 
-     //   [ForeignKey("LinkContentTypeId")]
-    //    [InverseProperty("LinkContentTypes")]
         public virtual LinkContentType LinkContentType { get; set; }
     }
 }

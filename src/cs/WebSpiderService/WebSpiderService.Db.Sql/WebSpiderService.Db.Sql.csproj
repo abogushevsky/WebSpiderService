@@ -56,6 +56,10 @@
     <Compile Include="Migrations\201401121246080_RemoveContraint.Designer.cs">
       <DependentUpon>201401121246080_RemoveContraint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201401121355065_LinkContentTypeRequired.cs" />
+    <Compile Include="Migrations\201401121355065_LinkContentTypeRequired.Designer.cs">
+      <DependentUpon>201401121355065_LinkContentTypeRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlLinksRepository.cs" />
@@ -80,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201401121246080_RemoveContraint.resx">
       <DependentUpon>201401121246080_RemoveContraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401121355065_LinkContentTypeRequired.resx">
+      <DependentUpon>201401121355065_LinkContentTypeRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
