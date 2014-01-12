@@ -48,50 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentType.cs">
-      <DependentUpon>WebSpiderDbModel.tt</DependentUpon>
+    <Compile Include="Migrations\201401121224449_InitialCreate.cs" />
+    <Compile Include="Migrations\201401121224449_InitialCreate.Designer.cs">
+      <DependentUpon>201401121224449_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Link.cs">
-      <DependentUpon>WebSpiderDbModel.tt</DependentUpon>
+    <Compile Include="Migrations\201401121246080_RemoveContraint.cs" />
+    <Compile Include="Migrations\201401121246080_RemoveContraint.Designer.cs">
+      <DependentUpon>201401121246080_RemoveContraint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlLinksRepository.cs" />
-    <Compile Include="WebSpiderDbModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebSpiderDbModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WebSpiderDbModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebSpiderDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WebSpiderDbModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebSpiderDbModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="WebSpiderDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="WebSpiderDbModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebSpiderDbModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="WebSpiderDbModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebSpiderDbModel.edmx</DependentUpon>
-      <LastGenOutput>WebSpiderDbModel.Context.cs</LastGenOutput>
-    </None>
-    <None Include="WebSpiderDbModel.edmx.diagram">
-      <DependentUpon>WebSpiderDbModel.edmx</DependentUpon>
-    </None>
-    <None Include="WebSpiderDbModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebSpiderDbModel.edmx</DependentUpon>
-      <LastGenOutput>WebSpiderDbModel.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -101,6 +73,14 @@
       <Project>{479CFEF8-044C-42F5-8A88-CF5A543A84C1}</Project>
       <Name>WebSpiderService.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201401121224449_InitialCreate.resx">
+      <DependentUpon>201401121224449_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401121246080_RemoveContraint.resx">
+      <DependentUpon>201401121246080_RemoveContraint.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,46 +1,57 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
 
 namespace WebSpiderService.Db.Sql
 {
     public class SqlLinksRepository : ILinksRepository
     {
-        public int SaveLink(Common.Entities.Link link)
+        public Guid SaveLink(Common.Entities.Link link)
         {
             Contract.Requires(link != null);
             Contract.Requires(link.LinkContentType != null);
             Contract.Requires(!string.IsNullOrEmpty(link.LinkContentType.ContentType));
-            lock (this)
+
+            if (link.Id == Guid.Empty)
             {
-                using (WebSpiderDBEntities context = new WebSpiderDBEntities())
+                link.Id = Guid.NewGuid();
+                link.CreatedDate = DateTime.Now;
+            }
+
+            using (WebSpiderDbContext context = new WebSpiderDbContext())
+            {
+                LinkContentType contentType =
+                    context.LinkContentTypes.SingleOrDefault(
+                        ct => ct.ContentType == link.LinkContentType.ContentType);
+
+                if (contentType == null)
                 {
-                    ContentType contentType =
-                        context.ContentTypes.SingleOrDefault(
-                            ct => ct.LinkContentType == link.LinkContentType.ContentType);
-                    if (contentType == null)
+                    contentType = new LinkContentType()
                     {
-                        contentType = new ContentType()
-                        {
-                            LinkContentType = link.LinkContentType.ContentType
-                        };
-                        context.ContentTypes.Add(contentType);
-                    }
-
-                    Link newLink = new Link()
-                    {
-                        ContentType = contentType,
-                        ContentTypeId = contentType.Id,
-                        ParentId = link.ParentId,
-                        Url = link.Url
+                        Id = Guid.NewGuid(),
+                        ContentType = link.LinkContentType.ContentType,
+                        FileExtension = link.LinkContentType.FileExtension
                     };
+                }
 
-                    context.Links.Add(newLink);
+                link.LinkContentType = contentType;
+                link.LinkContentTypeId = contentType.Id;
+
+                context.Links.Add(link);
+
+                try
+                {
                     context.SaveChanges();
-
-                    return newLink.Id;
+                }
+                catch (Exception ex)
+                {
+                    return Guid.Empty;
                 }
             }
+
+            return link.Id;
         }
     }
 }

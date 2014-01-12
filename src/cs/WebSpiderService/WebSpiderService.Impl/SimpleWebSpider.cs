@@ -58,7 +58,12 @@ namespace WebSpiderService.Impl
                     LinkResult linkDownloadResult = this._contentDownloader.DownloadSiteResourse(parentDocument.Url, documentUrls[i]);
                     if (linkDownloadResult != null)
                     {
-                        this._linksRepository.SaveLink(linkDownloadResult.Link);
+                        if (linkDownloadResult.Link != null && linkDownloadResult.Link.LinkContentType != null)
+                        {
+                            linkDownloadResult.Link.ParentId = parentDocument.LinkId;
+                            this._linksRepository.SaveLink(linkDownloadResult.Link);
+                        }
+
                         this._docsContainer.Add(linkDownloadResult);
 
                         //SaveDocument(documentUrls[i], documentContent, linksFolder, i.ToString());
@@ -74,7 +79,13 @@ namespace WebSpiderService.Impl
                 LinkResult linkDownloadResult = this._contentDownloader.DownloadUrl(url);
                 if (linkDownloadResult.Content != null)
                 {
-                    SaveDocument(url, linkDownloadResult.Content);
+                    Guid linkId = Guid.Empty;
+                    if (linkDownloadResult.Link != null && linkDownloadResult.Link.LinkContentType != null)
+                    {
+                        linkId = this._linksRepository.SaveLink(linkDownloadResult.Link);
+                    }
+
+                    SaveDocument(url, linkId, linkDownloadResult.Content);
                 }
             });
         }
@@ -88,6 +99,14 @@ namespace WebSpiderService.Impl
                 using (StreamReader reader = new StreamReader(fs))
                 {
                     result.Url = reader.ReadLine();
+
+                    string linkIdString = reader.ReadLine();
+                    Guid linkId;
+                    if (Guid.TryParse(linkIdString, out linkId))
+                    {
+                        result.LinkId = linkId;
+                    }
+
                     result.Content = reader.ReadToEnd();
                 }
             }
@@ -118,7 +137,7 @@ namespace WebSpiderService.Impl
             return result.ToArray();
         }
 
-        private void SaveDocument(string url, string document, string subfolderName = null, string fileName = null)
+        private void SaveDocument(string url, Guid linkId, string document, string subfolderName = null, string fileName = null)
         {
             string filePath = !string.IsNullOrEmpty(subfolderName) ? 
                 string.Format("{0}\\{1}", Properties.Settings.Default.DocumentsFolderPath, subfolderName) : 
@@ -129,6 +148,7 @@ namespace WebSpiderService.Impl
 
             StringBuilder fileContentBuilder = new StringBuilder();
             fileContentBuilder.AppendLine(url);
+            fileContentBuilder.AppendLine(linkId.ToString());
             fileContentBuilder.Append(document);
             SaveContentToFile(documentFilePath, fileContentBuilder.ToString());
         }

@@ -29,8 +29,8 @@ namespace WebSpiderService.Console
 
             spiderService.DowloadDocuments();
 
-            System.Console.WriteLine("Done!");
-
+            System.Console.WriteLine("Done! Press any ket to stop application");
+            System.Console.ReadLine();
         }
     }
 }

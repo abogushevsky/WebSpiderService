@@ -1,9 +1,10 @@
-﻿using WebSpiderService.Common.Entities;
+﻿using System;
+using WebSpiderService.Common.Entities;
 
 namespace WebSpiderService.Common.Interfaces
 {
     public interface ILinksRepository
     {
-        int SaveLink(Link link);
+        Guid SaveLink(Link link);
     }
 }
