@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.MongoDbDataManager.Ui", "WebSpiderService.MongoDbDataManager.Ui\WebSpiderService.MongoDbDataManager.Ui.csproj", "{D6AD98A7-357A-47A2-972A-9182BD883CFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Common", "..\WebSpiderService\WebSpiderService.Common\WebSpiderService.Common.csproj", "{479CFEF8-044C-42F5-8A88-CF5A543A84C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSpiderService.Db.Mongo", "..\WebSpiderService\WebSpiderService.Db.Mongo\WebSpiderService.Db.Mongo.csproj", "{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6AD98A7-357A-47A2-972A-9182BD883CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6AD98A7-357A-47A2-972A-9182BD883CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6AD98A7-357A-47A2-972A-9182BD883CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6AD98A7-357A-47A2-972A-9182BD883CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479CFEF8-044C-42F5-8A88-CF5A543A84C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FC06FA-CDB2-4CEF-83F8-F800DDBB9D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
