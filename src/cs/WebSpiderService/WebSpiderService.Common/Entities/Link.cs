@@ -22,6 +22,8 @@ namespace WebSpiderService.Common.Entities
 
         public DateTime CreatedDate { get; set; }
 
+        public DateTime LastDownloadedDate { get; set; }
+
         [Required]
         public Guid LinkContentTypeId { get; set; }
 
