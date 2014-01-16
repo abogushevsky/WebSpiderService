@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,5 +16,9 @@ namespace WebSpiderService.Common.Entities
 
         [MaxLength(16)]
         public string FileExtension { get; set; }
+
+        [DefaultValue(true)]
+        [Required]
+        public bool ShouldDownload { get; set; }
     }
 }

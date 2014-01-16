@@ -60,6 +60,18 @@
     <Compile Include="Migrations\201401121355065_LinkContentTypeRequired.Designer.cs">
       <DependentUpon>201401121355065_LinkContentTypeRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201401161823488_shouldDownload.cs" />
+    <Compile Include="Migrations\201401161823488_shouldDownload.Designer.cs">
+      <DependentUpon>201401161823488_shouldDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201401161827110_should_download_add_default_value.cs" />
+    <Compile Include="Migrations\201401161827110_should_download_add_default_value.Designer.cs">
+      <DependentUpon>201401161827110_should_download_add_default_value.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201401161827499_should_download_required.cs" />
+    <Compile Include="Migrations\201401161827499_should_download_required.Designer.cs">
+      <DependentUpon>201401161827499_should_download_required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlLinksRepository.cs" />
@@ -87,6 +99,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201401121355065_LinkContentTypeRequired.resx">
       <DependentUpon>201401121355065_LinkContentTypeRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401161823488_shouldDownload.resx">
+      <DependentUpon>201401161823488_shouldDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401161827110_should_download_add_default_value.resx">
+      <DependentUpon>201401161827110_should_download_add_default_value.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401161827499_should_download_required.resx">
+      <DependentUpon>201401161827499_should_download_required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
