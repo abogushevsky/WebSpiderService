@@ -45,14 +45,15 @@ namespace WebSpiderService.Impl
         /// </summary>
         public void DowloadDocuments()
         {
-            DownloadDocuments(GetUrls());
+            Link[] linksToDownload = this._linksRepository.GetAllLinks();
+            DownloadDocuments(linksToDownload.Select(lnk => lnk.Url).ToArray());
 
             string[] documentsFileNames = Directory.GetFiles(Properties.Settings.Default.DocumentsFolderPath);
 
             Parallel.ForEach(documentsFileNames, (docFileName) =>
             {
                 Document parentDocument = GetDocumentContentFromFile(docFileName);
-                string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument.Content);
+                string[] documentUrls = this._documentAnalizer.GetLinksFromDocument(parentDocument);
                 string linksFolder = docFileName.Replace(".txt", "");
                 linksFolder = linksFolder.Substring(linksFolder.LastIndexOf('\\'));
                 
@@ -64,6 +65,7 @@ namespace WebSpiderService.Impl
                         if (linkDownloadResult.Link != null && linkDownloadResult.Link.LinkContentType != null)
                         {
                             linkDownloadResult.Link.ParentId = parentDocument.LinkId;
+                            linkDownloadResult.Link.LastDownloadedDate = DateTime.Now;
                             this._linksRepository.SaveLink(linkDownloadResult.Link);
                             this._documentsRepository.StoreDocument(new Document()
                             {
@@ -74,23 +76,19 @@ namespace WebSpiderService.Impl
                             });
                         }
 
-                        this._docsContainer.Add(linkDownloadResult);
+                       // this._docsContainer.Add(linkDownloadResult);
                     }
                 });
             });
         }
 
         /// <summary>
-        /// Clears all stored data collected by the spider
+        /// Method is intended to download all documents from specified urls
         /// </summary>
-        public void ClearRepositories()
+        /// <param name="urls">Urls to download</param>
+        public void DownloadDocuments(string[] urls)
         {
-            this._documentsRepository.RemoveAllDocuments();
-        }
-
-        private void DownloadDocuments(string[] urlsToDownload)
-        {
-            Parallel.ForEach(urlsToDownload, (url) =>
+            Parallel.ForEach(urls, (url) =>
             {
                 LinkResult linkDownloadResult = this._contentDownloader.DownloadUrl(url);
                 if (linkDownloadResult.Content != null)
@@ -111,6 +109,14 @@ namespace WebSpiderService.Impl
                     SaveDocument(url, linkId, linkDownloadResult.Content);
                 }
             });
+        }
+
+        /// <summary>
+        /// Clears all stored data collected by the spider
+        /// </summary>
+        public void ClearRepositories()
+        {
+            this._documentsRepository.RemoveAllDocuments();
         }
 
         private Document GetDocumentContentFromFile(string docFileName)

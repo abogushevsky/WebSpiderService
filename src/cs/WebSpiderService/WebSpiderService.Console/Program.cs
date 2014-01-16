@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Spring.Context;
 using Spring.Context.Support;
+using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
 using WebSpiderService.Db.Mongo;
 using WebSpiderService.Impl;
@@ -17,6 +18,8 @@ namespace WebSpiderService.Console
         {
             IApplicationContext context = ContextRegistry.GetContext();
             ISpiderService spiderService = context.GetObject("WebSpiderService") as ISpiderService;
+            IDocumentsRepository documentsRepository = context.GetObject("MongoDbDocumentsRepository") as IDocumentsRepository;
+            IDocumentAnalizer documentAnalizer = context.GetObject("RegexDocumentAnalizer") as IDocumentAnalizer;
 
             if (spiderService == null)
             {
@@ -30,6 +33,13 @@ namespace WebSpiderService.Console
 
             spiderService.ClearRepositories();
             spiderService.DowloadDocuments();
+
+            Document[] remainingDocuments = documentsRepository.GetAllDocuments();
+            Parallel.ForEach(remainingDocuments, document =>
+            {
+                string[] urls = documentAnalizer.GetLinksFromDocument(document);
+                spiderService.DownloadDocuments(urls);
+            });
 
             System.Console.WriteLine("Done! Press any ket to stop application");
             System.Console.ReadLine();

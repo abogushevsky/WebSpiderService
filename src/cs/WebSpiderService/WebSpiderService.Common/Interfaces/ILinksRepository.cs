@@ -6,5 +6,7 @@ namespace WebSpiderService.Common.Interfaces
     public interface ILinksRepository
     {
         Guid SaveLink(Link link);
+
+        Link[] GetAllLinks();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
+using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
 
 namespace WebSpiderService.Impl
@@ -16,14 +17,14 @@ namespace WebSpiderService.Impl
         /// <summary>
         /// Method finds and returns urls in document content
         /// </summary>
-        /// <param name="documentContent"></param>
         /// <returns></returns>
-        public string[] GetLinksFromDocument(string documentContent)
+        public string[] GetLinksFromDocument(Document document)
         {
-            Contract.Requires(documentContent != null);
+            Contract.Requires(document != null);
 
             List<string> result = new List<string>();
-            MatchCollection matches = this._hrefRegex.Matches(documentContent);
+
+            MatchCollection matches = this._hrefRegex.Matches(document.Content);
             foreach (Match match in matches)
             {
                 result.Add(RemoveHref(match.Value));

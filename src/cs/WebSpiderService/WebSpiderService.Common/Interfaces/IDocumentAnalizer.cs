@@ -1,4 +1,5 @@
 ﻿using System;
+using WebSpiderService.Common.Entities;
 
 namespace WebSpiderService.Common.Interfaces
 {
@@ -10,6 +11,6 @@ namespace WebSpiderService.Common.Interfaces
         /// <summary>
         /// Method finds and returns urls in document content
         /// </summary>
-        string[] GetLinksFromDocument(string documentContent);
+        string[] GetLinksFromDocument(Document document);
     }
 }

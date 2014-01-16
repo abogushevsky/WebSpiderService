@@ -8,6 +8,8 @@ namespace WebSpiderService.Db.Sql
 {
     public class SqlLinksRepository : ILinksRepository
     {
+        private static object _locker = new object();
+
         public Guid SaveLink(Common.Entities.Link link)
         {
             Contract.Requires(link != null);
@@ -20,7 +22,7 @@ namespace WebSpiderService.Db.Sql
                 link.CreatedDate = DateTime.Now;
             }
 
-            lock (this)
+            lock (_locker)
             {
                 using (WebSpiderDbContext context = new WebSpiderDbContext())
                 {
@@ -43,7 +45,21 @@ namespace WebSpiderService.Db.Sql
                     link.LinkContentType = contentType;
                     link.LinkContentTypeId = contentType.Id;
 
-                    context.Links.Add(link);
+                    Link existingLink =
+                        context.Links.SingleOrDefault(
+                            lnk => lnk.Url.Equals(link.Url, StringComparison.InvariantCultureIgnoreCase));
+
+                    if (existingLink != null)
+                    {
+                        existingLink.LastDownloadedDate = link.LastDownloadedDate;
+                        existingLink.LinkContentType = link.LinkContentType;
+                        existingLink.LinkContentTypeId = link.LinkContentTypeId;
+                        link.Id = existingLink.Id;
+                    }
+                    else
+                    {
+                        context.Links.Add(link);
+                    }
 
                     try
                     {
@@ -57,6 +73,14 @@ namespace WebSpiderService.Db.Sql
             }
 
             return link.Id;
+        }
+
+        public Link[] GetAllLinks()
+        {
+            using (WebSpiderDbContext context = new WebSpiderDbContext())
+            {
+                return context.Links.ToArray();
+            }
         }
 
     }
