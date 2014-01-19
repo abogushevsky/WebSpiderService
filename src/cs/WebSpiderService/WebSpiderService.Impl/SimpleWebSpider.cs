@@ -103,6 +103,11 @@ namespace WebSpiderService.Impl
             });
         }
 
+        private void DownloadDocuments(Link[] links)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Clears all stored data collected by the spider
         /// </summary>
@@ -146,6 +151,7 @@ namespace WebSpiderService.Impl
                     while (!reader.EndOfStream)
                     {
                         string line = reader.ReadLine();
+
                         //TODO: Add url validation
                         if (!string.IsNullOrEmpty(line))
                         {
