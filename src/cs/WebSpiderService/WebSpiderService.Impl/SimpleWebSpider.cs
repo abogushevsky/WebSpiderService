@@ -16,9 +16,6 @@ namespace WebSpiderService.Impl
     /// </summary>
     public class SimpleWebSpider : ISpiderService
     {
-        private ConcurrentBag<LinkResult> _docsContainer;
- 
-        private long _currentDocumentIndex;
         private readonly IContentDownloader _contentDownloader;
         private readonly IDocumentAnalizer _documentAnalizer;
         private readonly ILinksRepository _linksRepository;
@@ -35,9 +32,6 @@ namespace WebSpiderService.Impl
             this._documentAnalizer = documentAnalizer;
             this._linksRepository = linksRepository;
             this._documentsRepository = documentsRepository;
-            this._currentDocumentIndex = 0;
-
-            this._docsContainer = new ConcurrentBag<LinkResult>();
         }
 
         /// <summary>
@@ -75,8 +69,6 @@ namespace WebSpiderService.Impl
                                 Url = linkDownloadResult.Link.Url
                             });
                         }
-
-                       // this._docsContainer.Add(linkDownloadResult);
                     }
                 });
             });
