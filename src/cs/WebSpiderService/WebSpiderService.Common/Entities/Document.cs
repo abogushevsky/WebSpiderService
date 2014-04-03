@@ -8,9 +8,9 @@ namespace WebSpiderService.Common.Entities
     /// </summary>
     public class Document
     {
-        ///// <summary>
-        ///// Document Id
-        ///// </summary>
+        /// <summary>
+        /// Document Id
+        /// </summary>
         public ObjectId Id { get; set; }
 
         /// <summary>
