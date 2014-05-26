@@ -4,6 +4,9 @@ namespace WebSpiderService.Db.Mongo
 {
     public class MongoDbSocialContentRepository : ISocialContentRepository
     {
-         
+        public MongoDbSocialContentRepository()
+        {
+            
+        }
     }
 }

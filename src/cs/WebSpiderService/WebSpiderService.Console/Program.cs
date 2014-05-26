@@ -7,6 +7,7 @@ using Spring.Context;
 using Spring.Context.Support;
 using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
+using WebSpiderService.Common.SocialNetworks;
 using WebSpiderService.Db.Mongo;
 using WebSpiderService.Impl;
 
