@@ -43,6 +43,8 @@ namespace WebSpiderService.Impl
                 await GetAuthToken();
             }
 
+            Person result = new Person();
+
             using (WebClient webClient = new WebClient())
             {
                 string personData =
@@ -50,11 +52,14 @@ namespace WebSpiderService.Impl
                         webClient.DownloadStringTaskAsync(string.Format(PERSON_INFO_URL_TEMPLATE, id, this.currentToken));
 
                 JObject obj = JObject.Parse(personData);
-
-                Console.WriteLine(personData);
+                result.Id = obj["id"].ToObject<string>();
+                result.UserName = obj["username"].ToObject<string>();
+                result.About = obj["about"].ToObject<string>();
+                result.Name = obj["name"].ToObject<string>();
+                result.BirthDate = obj["birthday"].ToObject<DateTime>();
             }
 
-            return null;
+            return result;
         }
 
         public async Task<FeedItem[]> GetPersonFeed(string personId, string lastFeedItemId)

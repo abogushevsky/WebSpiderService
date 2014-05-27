@@ -8,6 +8,7 @@ using Spring.Context.Support;
 using WebSpiderService.Common.Entities;
 using WebSpiderService.Common.Interfaces;
 using WebSpiderService.Common.SocialNetworks;
+using WebSpiderService.Common.SocialNetworks.Entities;
 using WebSpiderService.Common.SocialNetworks.Interfaces;
 using WebSpiderService.Db.Mongo;
 using WebSpiderService.Impl;
@@ -34,7 +35,8 @@ namespace WebSpiderService.Console
             System.Console.ReadKey();
             System.Console.WriteLine("Downloading...");
 
-            fbDownloader.GetPersonData("GennadyZuganov");
+            Person person = fbDownloader.GetPersonData("GennadyZuganov").Result;
+            Person me = fbDownloader.GetPersonData("anton.bogushevsky").Result;
 
             //spiderService.ClearRepositories();
             //spiderService.DowloadDocuments();

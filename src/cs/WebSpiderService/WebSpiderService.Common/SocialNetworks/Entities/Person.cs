@@ -1,4 +1,6 @@
-﻿namespace WebSpiderService.Common.SocialNetworks.Entities
+﻿using System;
+
+namespace WebSpiderService.Common.SocialNetworks.Entities
 {
     /// <summary>
     /// Represents a social network user
@@ -23,6 +25,6 @@
         /// </summary>
         public string About { get; set; }
 
-        public int Age { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }
