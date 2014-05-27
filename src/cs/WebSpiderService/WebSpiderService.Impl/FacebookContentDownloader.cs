@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using WebSpiderService.Common.SocialNetworks;
+using WebSpiderService.Common.SocialNetworks.Interfaces;
 
 namespace WebSpiderService.Impl
 {
@@ -16,7 +17,7 @@ namespace WebSpiderService.Impl
 
         public FacebookContentDownloader()
         {
-            GetAuthToken().Wait();
+            
         }
 
         private async Task GetAuthToken()

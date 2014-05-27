@@ -27,6 +27,9 @@
 
   <object id="SqlLinksRepository" type="WebSpiderService.Db.Sql.SqlLinksRepository, WebSpiderService.Db.Sql">
   </object>
+  
+  <object id="FacebookDownloader" type="WebSpiderService.Impl.FacebookContentDownloader, WebSpiderService.Impl">
+  </object>
 
   <object id="MongoDbDocumentsRepository" type="WebSpiderService.Db.Mongo.MongoDbDocumentsRepository, WebSpiderService.Db.Mongo">
     <constructor-arg name="connectionString" value="mongodb://localhost"></constructor-arg>

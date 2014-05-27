@@ -1,4 +1,4 @@
-﻿namespace WebSpiderService.Common.SocialNetworks
+﻿namespace WebSpiderService.Common.SocialNetworks.Interfaces
 {
     public interface ISocialContentRepository
     {
