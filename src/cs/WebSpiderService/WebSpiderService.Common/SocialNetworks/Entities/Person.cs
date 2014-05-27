@@ -15,6 +15,8 @@
 
         public string LastName { get; set; }
 
+        public string About { get; set; }
+
         public int Age { get; set; }
     }
 }
