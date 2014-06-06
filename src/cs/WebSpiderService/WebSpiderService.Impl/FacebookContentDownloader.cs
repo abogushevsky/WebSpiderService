@@ -33,6 +33,7 @@ namespace WebSpiderService.Impl
             using (WebClient webClient = new WebClient())
             {
                 this.currentToken = await webClient.DownloadStringTaskAsync(string.Format(AUTH_URL_TEMPLATE, this.appId, this.clientSecret));
+                this.currentToken = this.currentToken.Substring(this.currentToken.IndexOf('=') + 1);
             }
         }
 
@@ -47,16 +48,15 @@ namespace WebSpiderService.Impl
 
             using (WebClient webClient = new WebClient())
             {
-                string personData =
-                    await
-                        webClient.DownloadStringTaskAsync(string.Format(PERSON_INFO_URL_TEMPLATE, id, this.currentToken));
+                string requestUrl = string.Format(PERSON_INFO_URL_TEMPLATE, id, this.currentToken);
+                string personData = await webClient.DownloadStringTaskAsync(requestUrl);
 
                 JObject obj = JObject.Parse(personData);
                 result.Id = obj["id"].ToObject<string>();
                 result.UserName = obj["username"].ToObject<string>();
-                result.About = obj["about"].ToObject<string>();
+                result.About = obj["about"] != null ? obj["about"].ToObject<string>() : null;
                 result.Name = obj["name"].ToObject<string>();
-                result.BirthDate = obj["birthday"].ToObject<DateTime>();
+                result.BirthDate = obj["birthday"] != null ? obj["birthday"].ToObject<DateTime>() : DateTime.MinValue;
             }
 
             return result;

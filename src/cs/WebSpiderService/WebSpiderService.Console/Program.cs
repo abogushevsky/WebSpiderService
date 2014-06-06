@@ -35,8 +35,11 @@ namespace WebSpiderService.Console
             System.Console.ReadKey();
             System.Console.WriteLine("Downloading...");
 
-            Person person = fbDownloader.GetPersonData("GennadyZuganov").Result;
-            Person me = fbDownloader.GetPersonData("anton.bogushevsky").Result;
+            if (fbDownloader != null)
+            {
+                Person person = fbDownloader.GetPersonData("GennadyZuganov").Result;
+                Person me = fbDownloader.GetPersonData("anton.bogushevsky").Result;
+            }
 
             //spiderService.ClearRepositories();
             //spiderService.DowloadDocuments();
